@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "TLuLdRTfDASpLFsKDY6NM3UsHouZjXg6SUcY6ghBqp/dLK/XaQTPNdBcgZUkqm6RVxktmg8hk+hW9rQAreq+iA==",
+  "dgSpecHash": "xCntRAp7gDxXQWWbqBrkvtaZ0d5qwqFrSk8MYQj/IQr8wgtQwRW+QYHv0PlXafXcBmLDZPouewmi/GGkb7zsaw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\Dominio\\Dominio.csproj",
+  "projectFilePath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\Dominio\\Dominio.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Daut\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.13\\microsoft.netcore.app.host.win-x64.3.1.13.nupkg.sha512"
   ],

@@ -5801,11 +5801,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\PetShopAPI\\PetShopAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\PetShopAPI\\PetShopAPI.csproj",
       "projectName": "PetShopAPI",
-      "projectPath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\PetShopAPI\\PetShopAPI.csproj",
+      "projectPath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\PetShopAPI\\PetShopAPI.csproj",
       "packagesPath": "C:\\Users\\Daut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\PetShopAPI\\obj\\",
+      "outputPath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\PetShopAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Daut\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5822,8 +5822,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\Dados\\Dados.csproj": {
-              "projectPath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\Dados\\Dados.csproj"
+            "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\Dados\\Dados.csproj": {
+              "projectPath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\Dados\\Dados.csproj"
             }
           }
         }

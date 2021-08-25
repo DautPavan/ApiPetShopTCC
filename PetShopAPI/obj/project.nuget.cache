@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l7/NmO2z2SP6C24y5FcEgvXYR8ZV49GPK2/TlmRoXV/z1fDcGGB2dKTOEGntKdBXdjV9NhvFFre0aPLfSSpiEg==",
+  "dgSpecHash": "KLzuXhDxHRSzNXmBVjpjg2EeA0rmxdKjtAG8n50JdqmH+1vtfZrjNllpOrIy8L+Qkny3iKyGooe0Z5Hc7BgWxg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\PetShopAPI\\PetShopAPI.csproj",
+  "projectFilePath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\PetShopAPI\\PetShopAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Daut\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Daut\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WuQOrvf02YJBpgrWQ82MFGqy7EIf30JSvwLVT7Hh3Vb+KhaUf6podkPOWEnYJ1OjdNz0724gTDeBUAQeV2aNQQ==",
+  "dgSpecHash": "Kpg6I3wszmj5ByM9a0gQqq3QwQJwCOdEWFaLOQOBHAS5DPqj0DaDINlzUT8g5CT+4nFIUoWqstbTkGHoCaOpfQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\PetShopAPI\\Dados\\Dados.csproj",
+  "projectFilePath": "C:\\Users\\Daut\\Desktop\\unip\\TCC\\API\\ApiPetShopTCC\\Dados\\Dados.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Daut\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Daut\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
