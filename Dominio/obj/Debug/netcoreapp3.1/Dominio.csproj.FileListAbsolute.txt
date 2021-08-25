@@ -1,0 +1,13 @@
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfoInputs.cache
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.AssemblyInfo.cs
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.csproj.CoreCompileInputs.cache
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\bin\Debug\netcoreapp3.1\Dominio.exe
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\bin\Debug\netcoreapp3.1\Dominio.deps.json
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\bin\Debug\netcoreapp3.1\Dominio.runtimeconfig.json
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\bin\Debug\netcoreapp3.1\Dominio.runtimeconfig.dev.json
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\bin\Debug\netcoreapp3.1\Dominio.dll
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\bin\Debug\netcoreapp3.1\Dominio.pdb
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.dll
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.pdb
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.genruntimeconfig.cache
+C:\Users\Daut\Desktop\unip\TCC\API\PetShopAPI\Dominio\obj\Debug\netcoreapp3.1\Dominio.csprojAssemblyReference.cache

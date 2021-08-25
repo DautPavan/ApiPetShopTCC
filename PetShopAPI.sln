@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopAPI", "PetShopAPI\PetShopAPI.csproj", "{54F1A922-7C13-4C63-A86B-2AFBD3AB1D9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dados", "Dados\Dados.csproj", "{B7AFCB6B-0D39-462C-99A9-E5A916344E65}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dominio", "Dominio\Dominio.csproj", "{85E2AA0B-2705-48DD-8E01-A16108C13455}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54F1A922-7C13-4C63-A86B-2AFBD3AB1D9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F1A922-7C13-4C63-A86B-2AFBD3AB1D9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F1A922-7C13-4C63-A86B-2AFBD3AB1D9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F1A922-7C13-4C63-A86B-2AFBD3AB1D9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7AFCB6B-0D39-462C-99A9-E5A916344E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7AFCB6B-0D39-462C-99A9-E5A916344E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7AFCB6B-0D39-462C-99A9-E5A916344E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7AFCB6B-0D39-462C-99A9-E5A916344E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85E2AA0B-2705-48DD-8E01-A16108C13455}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85E2AA0B-2705-48DD-8E01-A16108C13455}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85E2AA0B-2705-48DD-8E01-A16108C13455}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85E2AA0B-2705-48DD-8E01-A16108C13455}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0BF4F6B7-5CA5-4CE1-BA50-ADAD79AC9EAD}
+	EndGlobalSection
+EndGlobal
