@@ -16,6 +16,7 @@ namespace Dominio.Entidades
         public ICollection<Contato> Contato { get; set; }
         public ICollection<Servico> Servico { get; set; }
         public ICollection<Produto> Produto { get; set; }
+        public ICollection<Funcionario> Funcionario { get; set; }
 
     }
 }

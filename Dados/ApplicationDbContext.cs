@@ -20,6 +20,7 @@ namespace Dados
         public DbSet<Dono> Dono { get; set; }
         public DbSet<DonoAnimal> DonoAnimal { get; set; }
         public DbSet<Empresa> Empresa { get; set; }
+        public DbSet<Funcionario> Funcionario { get; set; }
         public DbSet<Produto> Produto { get; set; }
         public DbSet<Raca> Raca { get; set; }
         public DbSet<Servico> Servico { get; set; }
@@ -34,6 +35,7 @@ namespace Dados
             modelBuilder.ApplyConfiguration(new DonoMap());
             modelBuilder.ApplyConfiguration(new DonoAnimalMap());
             modelBuilder.ApplyConfiguration(new EmpresaMap());
+            modelBuilder.ApplyConfiguration(new FuncionarioMap());
             modelBuilder.ApplyConfiguration(new ProdutoMap());
             modelBuilder.ApplyConfiguration(new RacaMap());
             modelBuilder.ApplyConfiguration(new ServicoMap());
