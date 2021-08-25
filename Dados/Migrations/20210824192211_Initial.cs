@@ -35,7 +35,7 @@ namespace Dados.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("ID", x => x.Id);
+                    table.PrimaryKey("PK_Animal_ID", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Animal_RacaIdXRaca_Id",
                         column: x => x.RacaId,

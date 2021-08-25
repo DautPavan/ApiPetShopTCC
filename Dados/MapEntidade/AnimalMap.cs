@@ -18,7 +18,7 @@ namespace Dados.MapEntidade
 
             //PK e FK
             builder.HasKey(animal => animal.Id)
-                .HasName("ID");
+                .HasName("PK_Animal_ID");
 
             builder.HasOne(animal => animal.Raca)
                 .WithMany(raca => raca.Animais)

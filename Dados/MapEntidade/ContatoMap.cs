@@ -22,7 +22,7 @@ namespace Dados.MapEntidade
             builder.HasOne(contato => contato.Dono)
                 .WithMany(dono => dono.Contato)
                 .HasForeignKey(contato => contato.DonoId)
-                .HasConstraintName("FK_Contato_DonoIdXDono_ID")
+                .HasConstraintName("FK_Contatos_DonoIdXDono_ID")
                 .OnDelete(DeleteBehavior.Restrict);
 
 
