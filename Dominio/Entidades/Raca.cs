@@ -13,5 +13,6 @@ namespace Dominio.Entidades
 
 
         public ICollection<Animal> Animais { get; set; }
+        public ICollection<Servico> Servico { get; set; }
     }
 }

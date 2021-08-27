@@ -17,6 +17,7 @@ namespace Dominio.Entidades
         
         public ICollection<Contato> Contato { get; set; }
         public ICollection<DonoAnimal> DonoAnimais { get; set; }
+        public ICollection<Agenda> Agenda { get; set; }
 
     }
 }
