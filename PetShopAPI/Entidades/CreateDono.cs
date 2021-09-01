@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Dominio.Entidades
+namespace PetShopAPI.Entidades
 {
-    public class Dono
+    public class CreateDono
     {
-        public int Id { get; set; }
+        public int DonoId { get; set; }
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Sexo { get; set; }
@@ -14,12 +15,8 @@ namespace Dominio.Entidades
         public string RG { get; set; }
         public string Email { get; set; }
         public int? AuthenticationId { get; set; }
-        public Authentication Authentication { get; set; }
-
-
-        public ICollection<Contato> Contato { get; set; }
-        public ICollection<DonoAnimal> DonoAnimais { get; set; }
-        public ICollection<Agenda> Agenda { get; set; }
+        public string Login { get; set; }
+        public string Senha { get; set; }
 
     }
 }

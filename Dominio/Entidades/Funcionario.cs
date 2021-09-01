@@ -18,6 +18,8 @@ namespace Dominio.Entidades
         public ICollection<Funcionario> Funcionarios { get; set; }
         public int EmpresaId { get; set; }
         public Empresa Empresa { get; set; }
+        public int? AuthenticationId { get; set; }
+        public Authentication Authentication { get; set; }
 
         public ICollection<Agenda> Agenda { get; set; }
 

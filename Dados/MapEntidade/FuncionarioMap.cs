@@ -31,6 +31,12 @@ namespace Dados.MapEntidade
                 .HasConstraintName("FK_Funcionarios_EmpresaIDXEmpresa_ID")
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(func => func.Authentication)
+                .WithMany(aut => aut.Funcionario)
+                .HasForeignKey(func => func.AuthenticationId)
+                .HasConstraintName("FK_Funcionarios_AuthenticationIdXAuthentication_ID")
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             //index 
             builder.HasIndex(func => func.Id)

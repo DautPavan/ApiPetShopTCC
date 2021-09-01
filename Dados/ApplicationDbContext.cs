@@ -16,6 +16,7 @@ namespace Dados
 
         public DbSet<Animal> Animal { get; set; }
         public DbSet<Agenda> Agenda { get; set; }
+        public DbSet<Authentication> Authentication { get; set; }
         public DbSet<Contato> Contato { get; set; }
         public DbSet<ContatoTelefone> ContatoTelefone { get; set; }
         public DbSet<Dono> Dono { get; set; }
@@ -32,6 +33,7 @@ namespace Dados
         {
             modelBuilder.ApplyConfiguration(new AnimalMap());
             modelBuilder.ApplyConfiguration(new AgendaMap());
+            modelBuilder.ApplyConfiguration(new AuthenticationMap());
             modelBuilder.ApplyConfiguration(new ContatoMap());
             modelBuilder.ApplyConfiguration(new ContatoTelefoneMap());
             modelBuilder.ApplyConfiguration(new DonoMap());

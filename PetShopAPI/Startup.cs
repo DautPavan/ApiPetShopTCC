@@ -12,6 +12,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Dados;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace PetShopAPI
 {
@@ -27,10 +30,33 @@ namespace PetShopAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddDbContext<ApplicationDbContext>(opt =>
                         opt.UseSqlServer(Configuration.GetConnectionString("ConnectionStringDaut")));
 
             services.AddControllers();
+
+            var key = Encoding.ASCII.GetBytes(Settings.Secret);
+            services.AddAuthentication(x => 
+            { 
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+            
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,9 +69,16 @@ namespace PetShopAPI
 
             app.UseHttpsRedirection();
 
+
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
+
+
+            app.UseCors(x => x.AllowAnyMethod()
+                              .AllowAnyOrigin()
+                              .AllowAnyHeader());
 
             app.UseEndpoints(endpoints =>
             {

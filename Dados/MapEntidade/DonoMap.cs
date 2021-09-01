@@ -19,6 +19,12 @@ namespace Dados.MapEntidade
             builder.HasKey(dono => dono.Id)
                 .HasName("PK_Donos");
 
+            builder.HasOne(dono => dono.Authentication)
+                .WithMany(aut => aut.Dono)
+                .HasForeignKey(dono => dono.AuthenticationId)
+                .HasConstraintName("FK_Donos_AuthenticationIdXAuthentication_ID")
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             //Index
             builder.HasIndex(dono => dono.Id)

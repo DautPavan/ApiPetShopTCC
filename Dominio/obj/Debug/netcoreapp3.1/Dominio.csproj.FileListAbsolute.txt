@@ -23,3 +23,4 @@ C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\Dominio\obj\Debug\netcoreapp3.1
 C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\Dominio\obj\Debug\netcoreapp3.1\Dominio.dll
 C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\Dominio\obj\Debug\netcoreapp3.1\Dominio.pdb
 C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\Dominio\obj\Debug\netcoreapp3.1\Dominio.genruntimeconfig.cache
+C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\Dominio\obj\Debug\netcoreapp3.1\Dominio.csprojAssemblyReference.cache
