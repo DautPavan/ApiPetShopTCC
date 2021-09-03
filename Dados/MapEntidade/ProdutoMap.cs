@@ -45,6 +45,7 @@ namespace Dados.MapEntidade
                 .IsRequired();
 
             builder.Property(prod => prod.PrecoUnit)
+                .HasColumnType("decimal")
                 .HasPrecision(ValorPrecision.Precision, ValorPrecision.Scale)
                 .HasDefaultValue(0)
                 .IsRequired();

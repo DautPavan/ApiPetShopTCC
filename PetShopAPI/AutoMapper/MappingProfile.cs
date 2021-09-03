@@ -16,20 +16,31 @@ namespace PetShopAPI.AutoMapper
                 .ForMember(dest => dest.Id, map => 
                     map.MapFrom(src => src.DonoId))
                 .ReverseMap();
-
             CreateMap<CreateDono, Authentication>()
                 .ForMember(dest => dest.Id, map => 
                     map.MapFrom(src => src.AuthenticationId))
                 .ReverseMap();
 
+
             CreateMap<CreateFuncionario, Funcionario>()
                 .ForMember(dest => dest.Id, map =>
                     map.MapFrom(src => src.FuncionarioId))
                 .ReverseMap();
-
             CreateMap<CreateFuncionario, Authentication>()
                 .ForMember(dest => dest.Id, map =>
                     map.MapFrom(src => src.AuthenticationId))
+                .ReverseMap();
+
+
+            CreateMap<CreateAnimal, Animal>()
+                .ForMember(dest => dest.Id, map =>
+                     map.MapFrom(src => src.AnimalId))
+                .ReverseMap();
+            CreateMap<CreateAnimal, DonoAnimal>()
+                .ForMember(dest => dest.DonoId, map =>
+                    map.MapFrom(src => src.DonoId))
+                .ForMember(dest => dest.AnimalId, map =>
+                    map.MapFrom(src => src.AnimalId))
                 .ReverseMap();
         }
     }
