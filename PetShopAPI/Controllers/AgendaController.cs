@@ -5,33 +5,34 @@ using Dominio.Entidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PetShopAPI.Controllers
 {
-
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicoController : Controller
+    public class AgendaController : Controller
     {
         private ApplicationDbContext _contexto;
         protected readonly IMapper _mapper;
 
-        public ServicoController(ApplicationDbContext contexto, IMapper mapper)
+        public AgendaController(ApplicationDbContext contexto, IMapper mapper)
         {
             _contexto = contexto;
             _mapper = mapper;
-        }
 
+        }
 
         [HttpPost]
         [Route("Create")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateService([FromBody] Servico body)
+        public async Task<IActionResult> CreateAgenda([FromBody] Agenda body)
         {
             try
             {
@@ -39,12 +40,12 @@ namespace PetShopAPI.Controllers
                     return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem corpo" }));
 
 
-                ServicoServices servicoServices = new ServicoServices(_contexto);
+                AgendaServices agendaServices = new AgendaServices(_contexto);
 
-                servicoServices.Adicionar(body);
-                servicoServices.Commit();
+                agendaServices.Adicionar(body);
+                agendaServices.Commit();
 
-                return Ok(JsonConvert.SerializeObject(new { message = "Serviço criado com Sucesso!" }));
+                return Ok(JsonConvert.SerializeObject(new { message = "Horario cadastrado com sucesso!" }));
 
             }
             catch (Exception ex)
@@ -56,13 +57,13 @@ namespace PetShopAPI.Controllers
         [HttpGet]
         [Route("Buscar/{id:int}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> BuscarServico(int id)
+        public async Task<IActionResult> BuscarAgenda(int id)
         {
             try
             {
-                ServicoServices servicoServices = new ServicoServices(_contexto);
+                AgendaServices agendaServices = new AgendaServices(_contexto);
 
-                var servico = servicoServices.Get(serv => serv.Id == id).FirstOrDefault();
+                var servico = agendaServices.Get(agend => agend.Id == id).FirstOrDefault();
 
                 return Ok(JsonConvert.SerializeObject(servico));
 
@@ -74,17 +75,26 @@ namespace PetShopAPI.Controllers
         }
 
         [HttpGet]
-        [Route("ListaServicos/{id:int}")]
+        [Route("Lista/{id:int}/{data}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> ListaFuncionario(int id)
+        public async Task<IActionResult> ListaAgenda(int id, DateTime data)
         {
             try
             {
-                ServicoServices servicoServices = new ServicoServices(_contexto);
+                AgendaServices agendaServices = new AgendaServices(_contexto);
 
-                List<Servico> listServico = servicoServices.Get(serv => serv.EmpresaId == id).ToList();
+                List<Agenda> listAgenda = agendaServices.Get(agend =>
+                                                                agend.EmpresaId == id &&
+                                                                agend.HoraAgendada.Year == data.Year &&
+                                                                agend.HoraAgendada.Month == data.Month &&
+                                                                agend.HoraAgendada.Day == data.Day 
+                                                            )
+                                                            .Include(agend => agend.Animal)
+                                                            .Include(agend => agend.Dono)
+                                                            .Include(agend => agend.Funcionario)
+                                                            .ToList();
 
-                return Ok(JsonConvert.SerializeObject(listServico));
+                return Ok(JsonConvert.SerializeObject(listAgenda, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
 
             }
             catch (Exception ex)
@@ -96,7 +106,7 @@ namespace PetShopAPI.Controllers
         [HttpPut]
         [Route("Alter")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> AlterService([FromBody] Servico body)
+        public async Task<IActionResult> AlterAgenda([FromBody] Agenda body)
         {
             try
             {
@@ -107,10 +117,10 @@ namespace PetShopAPI.Controllers
                     return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação precisa ter o Id do serviço ou ele tem que ser diferente de 0" }));
 
 
-                ServicoServices servicoServices = new ServicoServices(_contexto);
+                AgendaServices agendaServices = new AgendaServices(_contexto);
 
-                servicoServices.Atualizar(body);
-                servicoServices.Commit();
+                agendaServices.Atualizar(body);
+                agendaServices.Commit();
 
                 return Ok(JsonConvert.SerializeObject(new { message = "Serviço alterado com Sucesso!" }));
 
@@ -124,16 +134,16 @@ namespace PetShopAPI.Controllers
         [HttpDelete]
         [Route("Delete/{id:int}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> DeletarService(int id)
+        public async Task<IActionResult> DeletarAgenda(int id)
         {
             try
             {
-                ServicoServices servicoServices = new ServicoServices(_contexto);
+                AgendaServices agendaServices = new AgendaServices(_contexto);
 
-                servicoServices.Deletar(serv => serv.Id == id);
-                servicoServices.Commit();
+                agendaServices.Deletar(serv => serv.Id == id);
+                agendaServices.Commit();
 
-                return Ok(JsonConvert.SerializeObject(new { message = "Serviço deletado com Sucesso!" }));
+                return Ok(JsonConvert.SerializeObject(new { message = "Horario deletado com Sucesso!" }));
 
             }
             catch (Exception ex)
@@ -141,6 +151,5 @@ namespace PetShopAPI.Controllers
                 return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
             }
         }
-
     }
 }
