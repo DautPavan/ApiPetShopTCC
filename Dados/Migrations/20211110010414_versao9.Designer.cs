@@ -4,14 +4,16 @@ using Dados;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dados.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211110010414_versao9")]
+    partial class versao9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,6 +201,9 @@ namespace Dados.Migrations
                     b.Property<int?>("AuthenticationId")
                         .HasColumnType("int");
 
+                    b.Property<string>("CPF")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("datetime2");
 
@@ -207,6 +212,9 @@ namespace Dados.Migrations
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RG")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Sexo")
                         .HasColumnType("nvarchar(max)");
@@ -409,13 +417,16 @@ namespace Dados.Migrations
                     b.Property<string>("Descricao")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EmpresaId")
+                    b.Property<int>("EmpresaId")
                         .HasColumnType("int");
 
                     b.Property<string>("NomeServico")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int?>("RacaId")
+                    b.Property<int>("PorteAnimal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RacaId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Valor")
@@ -427,7 +438,8 @@ namespace Dados.Migrations
                     b.HasKey("Id")
                         .HasName("PK_Servicos_Id");
 
-                    b.HasIndex("EmpresaId");
+                    b.HasIndex("EmpresaId")
+                        .HasDatabaseName("I_Servicos_EmpresaId");
 
                     b.HasIndex("Id")
                         .HasDatabaseName("I_Servicos_Id");
@@ -627,13 +639,21 @@ namespace Dados.Migrations
 
             modelBuilder.Entity("Dominio.Entidades.Servico", b =>
                 {
-                    b.HasOne("Dominio.Entidades.Empresa", null)
+                    b.HasOne("Dominio.Entidades.Empresa", "Empresa")
                         .WithMany("Servico")
-                        .HasForeignKey("EmpresaId");
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.HasOne("Dominio.Entidades.Raca", null)
+                    b.HasOne("Dominio.Entidades.Raca", "Raca")
                         .WithMany("Servico")
-                        .HasForeignKey("RacaId");
+                        .HasForeignKey("RacaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Empresa");
+
+                    b.Navigation("Raca");
                 });
 
             modelBuilder.Entity("Dominio.Entidades.Animal", b =>

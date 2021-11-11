@@ -20,18 +20,10 @@ namespace Dados.MapEntidade
             builder.HasKey(servic => servic.Id)
                 .HasName("PK_Servicos_Id");
 
-            builder.HasOne(servic => servic.Empresa)
-                .WithMany(emp => emp.Servico)
-                .HasForeignKey(servic => servic.EmpresaId)
-                .OnDelete(DeleteBehavior.Restrict);
-
 
             //index 
             builder.HasIndex(servic => servic.Id)
                 .HasDatabaseName("I_Servicos_Id");
-
-            builder.HasIndex(servic => servic.EmpresaId)
-                .HasDatabaseName("I_Servicos_EmpresaId");
 
             builder.HasIndex(servic => servic.NomeServico)
                 .HasDatabaseName("I_Servicos_NomeServico");
@@ -40,9 +32,6 @@ namespace Dados.MapEntidade
             //campos
             builder.Property(servic => servic.Id)
                 .HasColumnName("ServicoID")
-                .IsRequired();
-
-            builder.Property(servic => servic.EmpresaId)
                 .IsRequired();
             
             builder.Property(servic => servic.Valor)

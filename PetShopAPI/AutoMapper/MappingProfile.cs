@@ -37,8 +37,6 @@ namespace PetShopAPI.AutoMapper
                      map.MapFrom(src => src.AnimalId))
                 .ReverseMap();
             CreateMap<CreateAnimal, DonoAnimal>()
-                .ForMember(dest => dest.DonoId, map =>
-                    map.MapFrom(src => src.DonoId))
                 .ForMember(dest => dest.AnimalId, map =>
                     map.MapFrom(src => src.AnimalId))
                 .ReverseMap();

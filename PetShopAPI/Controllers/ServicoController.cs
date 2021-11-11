@@ -82,7 +82,7 @@ namespace PetShopAPI.Controllers
             {
                 ServicoServices servicoServices = new ServicoServices(_contexto);
 
-                List<Servico> listServico = servicoServices.Get(serv => serv.EmpresaId == id).ToList();
+                List<Servico> listServico = servicoServices.GetTodos().ToList();
 
                 return Ok(JsonConvert.SerializeObject(listServico));
 
@@ -135,6 +135,25 @@ namespace PetShopAPI.Controllers
 
                 return Ok(JsonConvert.SerializeObject(new { message = "Serviço deletado com Sucesso!" }));
 
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
+
+        [HttpGet]
+        [Route("BuscarTodos")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> BuscarTodos()
+        {
+            try
+            {
+                ServicoServices servicoServices = new ServicoServices(_contexto);
+
+                var servico = servicoServices.GetTodos();
+
+                return Ok(JsonConvert.SerializeObject(servico));
             }
             catch (Exception ex)
             {

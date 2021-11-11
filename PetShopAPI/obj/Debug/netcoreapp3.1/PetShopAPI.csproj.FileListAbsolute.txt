@@ -139,3 +139,4 @@ C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\PetShopAPI\obj\Debug\netcoreapp
 C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\PetShopAPI\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\PetShopAPI\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\PetShopAPI\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Daut\Desktop\unip\TCC\API\ApiPetShopTCC\PetShopAPI\bin\Debug\netcoreapp3.1\web.config

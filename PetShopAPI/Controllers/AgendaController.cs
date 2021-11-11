@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PetShopAPI.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,17 +33,23 @@ namespace PetShopAPI.Controllers
         [HttpPost]
         [Route("Create")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public async Task<IActionResult> CreateAgenda([FromBody] Agenda body)
+        public async Task<IActionResult> CreateAgenda([FromBody]CreateHorario body)
         {
             try
             {
                 if (body == null)
                     return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem corpo" }));
 
+                var pessoa = _contexto.Dono.Where(dono => dono.AuthenticationId.ToString() == User.Identity.Name).FirstOrDefault();
 
                 AgendaServices agendaServices = new AgendaServices(_contexto);
+                Agenda agenda = new Agenda();
+                agenda.HoraAgendada = body.HoraAgendada;
+                agenda.ServicoId = body.ServicoId;
+                agenda.AnimalId = body.AnimalId;
+                agenda.DonoId = pessoa.Id;
 
-                agendaServices.Adicionar(body);
+                agendaServices.Adicionar(agenda);
                 agendaServices.Commit();
 
                 return Ok(JsonConvert.SerializeObject(new { message = "Horario cadastrado com sucesso!" }));
@@ -84,14 +91,12 @@ namespace PetShopAPI.Controllers
                 AgendaServices agendaServices = new AgendaServices(_contexto);
 
                 List<Agenda> listAgenda = agendaServices.Get(agend =>
-                                                                agend.EmpresaId == id &&
                                                                 agend.HoraAgendada.Year == data.Year &&
                                                                 agend.HoraAgendada.Month == data.Month &&
                                                                 agend.HoraAgendada.Day == data.Day 
                                                             )
                                                             .Include(agend => agend.Animal)
                                                             .Include(agend => agend.Dono)
-                                                            .Include(agend => agend.Funcionario)
                                                             .ToList();
 
                 return Ok(JsonConvert.SerializeObject(listAgenda, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));

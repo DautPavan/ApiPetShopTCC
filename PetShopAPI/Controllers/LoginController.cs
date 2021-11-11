@@ -86,6 +86,10 @@ namespace PetShopAPI.Controllers
                 AuthenticationServices authenticationServices = new AuthenticationServices(_contexto);
                 DonoServices donoServices = new DonoServices(_contexto);
 
+                var loginIgual = authenticationServices.Get(el => el.Login == body.Login).ToList();
+                if (loginIgual.Count >= 1)
+                    return BadRequest(JsonConvert.SerializeObject(new { message = "Esse Login não esta disponivel." }));
+
                 var dono = _mapper.Map<Dono>(body);
                 var authentication = _mapper.Map<Authentication>(body);
 
@@ -121,6 +125,8 @@ namespace PetShopAPI.Controllers
                     return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem senha" }));
 
                 AuthenticationServices authenticationServices = new AuthenticationServices(_contexto);
+                FuncionarioServices funcionarioServices = new FuncionarioServices(_contexto);
+                DonoServices donoServices = new DonoServices(_contexto);
 
 
                 var result = authenticationServices.Primeiro(
@@ -135,8 +141,13 @@ namespace PetShopAPI.Controllers
 
                 var token = TokenService.GerarToken(result);
 
+                var dono = donoServices.Get(d => d.AuthenticationId == result.Id).FirstOrDefault();
+                var func = funcionarioServices.Get(f => f.AuthenticationId == result.Id).FirstOrDefault();
+
+
                 var obj = new { 
                                 Id = result.Id, 
+                                Nome = dono == null? func.NomeCompleto : dono.Nome,
                                 Login = result.Login, 
                                 Token = token 
                             };
@@ -149,5 +160,22 @@ namespace PetShopAPI.Controllers
             }
         }
 
+
+        [HttpGet]
+        [Route("Teste")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Teste()
+        {
+            try
+            {
+
+                return StatusCode(StatusCodes.Status201Created, JsonConvert.SerializeObject(new { msg = "Usuario criado com sucesso" }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
     }
 }

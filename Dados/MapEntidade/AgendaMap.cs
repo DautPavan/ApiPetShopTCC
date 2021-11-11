@@ -14,16 +14,9 @@ namespace Dados.MapEntidade
             //Table
             builder.ToTable("Agendas");
 
-
             //PK e FK
             builder.HasKey(agen => agen.Id)
                 .HasName("PK_Agendas_ID");
-
-            builder.HasOne(agen => agen.Funcionario)
-                .WithMany(func => func.Agenda)
-                .HasForeignKey(agen => agen.FuncionarioId)
-                .HasConstraintName("FK_Agendas_FuncionarioIDXFuncionario_Id")
-                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(agen => agen.Dono)
                 .WithMany(dono => dono.Agenda)
@@ -43,12 +36,6 @@ namespace Dados.MapEntidade
                 .HasConstraintName("FK_Agendas_ServicoIDXServico_Id")
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(agen => agen.Empresa)
-                .WithMany(emp => emp.Agenda)
-                .HasForeignKey(agen => agen.EmpresaId)
-                .HasConstraintName("FK_Agendas_EmpresaIDXEmpresa_Id")
-                .OnDelete(DeleteBehavior.Restrict);
-
 
             //index 
             builder.HasIndex(agen => agen.Id)
@@ -56,9 +43,6 @@ namespace Dados.MapEntidade
 
             builder.HasIndex(agen => agen.DonoId)
                 .HasDatabaseName("I_Agendas_DonoId");
-
-            builder.HasIndex(agen => agen.EmpresaId)
-                .HasDatabaseName("I_Agendas_EmpresaId");
             
             builder.HasIndex(agen => agen.ServicoId)
                 .HasDatabaseName("I_Agendas_ServicoId");

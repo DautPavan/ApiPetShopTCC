@@ -14,7 +14,6 @@ namespace Dados.MapEntidade
             //Tabela
             builder.ToTable("Donos");
 
-
             //PK e FK
             builder.HasKey(dono => dono.Id)
                 .HasName("PK_Donos");

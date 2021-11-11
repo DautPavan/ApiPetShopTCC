@@ -5,6 +5,7 @@ using Dominio.Entidades;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using PetShopAPI.Entidades;
 using System;
@@ -39,19 +40,18 @@ namespace PetShopAPI.Controllers
                 if (body == null)
                       return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem corpo" }));
 
-                if (body.DonoId == null)
-                    return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem o Dono" }));
-
                 if (body.RacaId == null)
                     return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem a Raça" }));
 
-
+                var pessoa = _contexto.Dono.Where(dono => dono.AuthenticationId.ToString() == User.Identity.Name).FirstOrDefault();
 
                 AnimalServices animalServices = new AnimalServices(_contexto);
                 DonoAnimalServices donoAnimalServices = new DonoAnimalServices(_contexto);
 
                 var animal = _mapper.Map<Animal>(body);
                 var donoAnimal = _mapper.Map<DonoAnimal>(body);
+
+                donoAnimal.DonoId = pessoa.Id;
 
                 animalServices.Adicionar(animal);
                 animalServices.Commit();
@@ -77,11 +77,29 @@ namespace PetShopAPI.Controllers
         {
             try
             {
-               
+                var pessoa = _contexto.Dono.Where(dono => dono.AuthenticationId.ToString() == User.Identity.Name).FirstOrDefault();
 
-              
+                var animalList = _contexto.DonoAnimal.Where(
+                                                        DonoAnimal => DonoAnimal.DonoId == pessoa.Id
+                                                    )
+                                                    .Include(DonoAnimal => DonoAnimal.Animal)
+                                                        .ThenInclude(animal => animal.Raca)
+                                                    .Select((DonoAnimal) => new Animal
+                                                    {
+                                                        Id = DonoAnimal.Animal.Id,
+                                                        Nome = DonoAnimal.Animal.Nome,
+                                                        Idade = DonoAnimal.Animal.Idade,
+                                                        Peso = DonoAnimal.Animal.Peso,
+                                                        GeneroBiologico = DonoAnimal.Animal.GeneroBiologico,
+                                                        PorteAnimal = DonoAnimal.Animal.PorteAnimal,
+                                                        RacaId = DonoAnimal.Animal.RacaId,
+                                                        Raca = DonoAnimal.Animal.Raca,
+                                                    })
+                                                    .ToList();
 
-                return Ok(JsonConvert.SerializeObject(new { message = "Animal criada com Sucesso!" }));
+
+
+                return Ok(JsonConvert.SerializeObject(animalList));
 
             }
             catch (Exception ex)
