@@ -30,13 +30,13 @@ namespace PetShopAPI.Controllers
 
         [HttpPost]
         [Route("Create")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> CreateService([FromBody] Servico body)
         {
             try
             {
                 if (body == null)
-                    return BadRequest(JsonConvert.SerializeObject(new { message = "A solicitação não contem corpo" }));
+                    return BadRequest(JsonConvert.SerializeObject(new { messagem = "A solicitação não contem corpo" }));
 
 
                 ServicoServices servicoServices = new ServicoServices(_contexto);
@@ -44,12 +44,12 @@ namespace PetShopAPI.Controllers
                 servicoServices.Adicionar(body);
                 servicoServices.Commit();
 
-                return Ok(JsonConvert.SerializeObject(new { message = "Serviço criado com Sucesso!" }));
+                return Ok(JsonConvert.SerializeObject(new { messagem = "Serviço criado com Sucesso!" }));
 
             }
             catch (Exception ex)
             {
-                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+                return BadRequest(JsonConvert.SerializeObject(new { menssagem = "Ocorreu algum erro: " + ex.InnerException.Message }));
             }
         }
 
@@ -123,7 +123,7 @@ namespace PetShopAPI.Controllers
 
         [HttpDelete]
         [Route("Delete/{id:int}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeletarService(int id)
         {
             try
