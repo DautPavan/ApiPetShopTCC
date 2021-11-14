@@ -69,5 +69,32 @@ namespace PetShopAPI.Controllers
                 return BadRequest(JsonConvert.SerializeObject(new { messagem = "Ocorreu algum erro: " + ex.InnerException.Message }));
             }
         }
+
+        [HttpDelete]
+        [Route("Delete/{id:int}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> DeletarRaca(int id)
+        {
+            try
+            {
+                AnimalServices animalServices = new AnimalServices(_contexto);
+                RacaServices racaServices = new RacaServices(_contexto);
+
+                var AnimalPossuiRaca = animalServices.Get(el => el.RacaId == id).ToList();
+                if (AnimalPossuiRaca.Count > 0)
+                    return BadRequest(JsonConvert.SerializeObject(new { messagem = "Existe animais com essa Raça cadastrados." }));
+                    
+
+                racaServices.Deletar(serv => serv.Id == id);
+                racaServices.Commit();
+
+                return Ok(JsonConvert.SerializeObject(new { messagem = "Raça deletado com Sucesso!" }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { messagem = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using PetShopAPI.DTO;
 using PetShopAPI.Entidades;
 using System;
 using System.Collections.Generic;
@@ -149,6 +150,47 @@ namespace PetShopAPI.Controllers
                 agendaServices.Commit();
 
                 return Ok(JsonConvert.SerializeObject(new { message = "Horario deletado com Sucesso!" }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
+
+        [HttpGet]
+        [Route("MontarGrid")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> MontarGrid([FromQuery]DateTime Data)
+        {
+            try
+            {
+                AgendaServices agendaServices = new AgendaServices(_contexto);
+
+                List<GridDTO> listAgenda = agendaServices.Get(agend =>
+                                                                agend.HoraAgendada.Year == Data.Year &&
+                                                                agend.HoraAgendada.Month == Data.Month &&
+                                                                agend.HoraAgendada.Day == Data.Day
+                                                            )
+                                                            .Include(agend => agend.Animal)
+                                                            .Include(agend => agend.Dono)
+                                                            .Include(agend => agend.Servico)
+                                                            .Include(agend => agend.Animal.Raca)
+                                                            .Select(agend => new GridDTO {
+                                                                HoraAgendada = agend.HoraAgendada,
+                                                                NomeServico = agend.Servico.NomeServico,
+                                                                Valor = agend.Servico.Valor,
+                                                                Descricao = agend.Servico.Descricao,
+                                                                NomeDono = agend.Dono.Nome,
+                                                                Email = agend.Dono.Email,
+                                                                NomeAnimal = agend.Animal.Nome,
+                                                                PorteAnimal = agend.Animal.PorteAnimal,
+                                                                GeneroBiologico = agend.Animal.GeneroBiologico,
+                                                                NomeRaca = agend.Animal.Raca.Nome
+                                                            })
+                                                            .ToList();
+
+                return Ok(JsonConvert.SerializeObject(listAgenda, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
 
             }
             catch (Exception ex)
