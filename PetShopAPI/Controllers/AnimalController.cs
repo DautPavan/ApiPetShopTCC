@@ -108,5 +108,33 @@ namespace PetShopAPI.Controllers
             }
         }
 
+        [HttpDelete]
+        [Route("Deletar/{id:int}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> Deletar(int id)
+        {
+            try
+            {
+
+                AgendaServices agendaServices = new AgendaServices(_contexto);
+                DonoAnimalServices donoAnimalServices = new DonoAnimalServices(_contexto);
+                AnimalServices animalServices = new AnimalServices(_contexto);
+
+                agendaServices.Deletar(agend => agend.AnimalId == id);
+                donoAnimalServices.Deletar(agend => agend.AnimalId == id);
+                animalServices.Deletar(agend => agend.Id == id);
+
+                agendaServices.Commit();
+                donoAnimalServices.Commit();
+                animalServices.Commit();
+
+                return Ok(JsonConvert.SerializeObject(new { messagem =  "ok" }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
     }
 }

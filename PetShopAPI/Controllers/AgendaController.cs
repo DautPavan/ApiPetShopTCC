@@ -98,6 +98,37 @@ namespace PetShopAPI.Controllers
                                                             )
                                                             .Include(agend => agend.Animal)
                                                             .Include(agend => agend.Dono)
+                                                            .OrderBy(agend => agend.HoraAgendada)
+                                                            .ThenBy(agend => agend.Animal.Nome)
+                                                            .ToList();
+
+                return Ok(JsonConvert.SerializeObject(listAgenda, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
+
+        [HttpGet]
+        [Route("ListaMobiPessoa")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> ListaMobiPessoa()
+        {
+            try
+            {
+                var pessoa = _contexto.Dono.Where(dono => dono.AuthenticationId.ToString() == User.Identity.Name).FirstOrDefault();
+
+                AgendaServices agendaServices = new AgendaServices(_contexto);
+
+                List<Agenda> listAgenda = agendaServices.Get(agend => agend.DonoId == pessoa.Id &&
+                                                             agend.HoraAgendada.Date >= DateTime.Now.Date)
+                                                            .Include(agend => agend.Animal)
+                                                            .Include(agend => agend.Dono)
+                                                            .Include(agend => agend.Servico)
+                                                            .OrderBy(agend => agend.HoraAgendada)
+                                                            .ThenBy(agend => agend.Animal.Nome)
                                                             .ToList();
 
                 return Ok(JsonConvert.SerializeObject(listAgenda, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
@@ -188,6 +219,10 @@ namespace PetShopAPI.Controllers
                                                                 GeneroBiologico = agend.Animal.GeneroBiologico,
                                                                 NomeRaca = agend.Animal.Raca.Nome
                                                             })
+                                                            .OrderBy(agend => agend.HoraAgendada)
+                                                            .ThenBy(agend => agend.NomeServico)
+                                                            .ThenBy(agend => agend.NomeDono)
+                                                            .ThenBy(agend => agend.NomeAnimal)
                                                             .ToList();
 
                 return Ok(JsonConvert.SerializeObject(listAgenda, Formatting.None, new JsonSerializerSettings() { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
