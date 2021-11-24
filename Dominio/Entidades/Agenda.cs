@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Dominio.Enum;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Dominio.Entidades
@@ -14,6 +16,9 @@ namespace Dominio.Entidades
         public Dono Dono { get; set; }
         public int? AnimalId { get; set; }
         public Animal Animal { get; set; }
+
+        [DefaultValue(StatusService.Espera)]
+        public StatusService Status { get; set; }
 
     }
 }

@@ -2,6 +2,7 @@
 using Dados;
 using Dados.Services;
 using Dominio.Entidades;
+using Dominio.Enum;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -170,7 +171,7 @@ namespace PetShopAPI.Controllers
 
         [HttpDelete]
         [Route("Delete/{id:int}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<IActionResult> DeletarAgenda(int id)
         {
             try
@@ -181,6 +182,54 @@ namespace PetShopAPI.Controllers
                 agendaServices.Commit();
 
                 return Ok(JsonConvert.SerializeObject(new { message = "Horario deletado com Sucesso!" }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
+
+        [HttpGet]
+        [Route("Iniciar/{id:int}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> IniciarAgenda(int id)
+        {
+            try
+            {
+                AgendaServices agendaServices = new AgendaServices(_contexto);
+
+                var agend = agendaServices.Get(serv => serv.Id == id).FirstOrDefault();
+                agend.Status = StatusService.Iniciado;
+
+                agendaServices.Atualizar(agend);
+                agendaServices.Commit();
+
+                return Ok(JsonConvert.SerializeObject(new { message = "Horario Iniciado com Sucesso." }));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(JsonConvert.SerializeObject(new { menssage = "Ocorreu algum erro: " + ex.InnerException.Message }));
+            }
+        }
+
+        [HttpGet]
+        [Route("Finalizar/{id:int}")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<IActionResult> FinalizarAgenda(int id)
+        {
+            try
+            {
+                AgendaServices agendaServices = new AgendaServices(_contexto);
+
+                var agend = agendaServices.Get(serv => serv.Id == id).FirstOrDefault();
+                agend.Status = StatusService.Finalizado;
+
+                agendaServices.Atualizar(agend);
+                agendaServices.Commit();
+
+                return Ok(JsonConvert.SerializeObject(new { message = "Horario finalizado com Sucesso!" }));
 
             }
             catch (Exception ex)
@@ -208,6 +257,7 @@ namespace PetShopAPI.Controllers
                                                             .Include(agend => agend.Servico)
                                                             .Include(agend => agend.Animal.Raca)
                                                             .Select(agend => new GridDTO {
+                                                                Id = agend.Id,
                                                                 HoraAgendada = agend.HoraAgendada,
                                                                 NomeServico = agend.Servico.NomeServico,
                                                                 Valor = agend.Servico.Valor,
@@ -217,7 +267,8 @@ namespace PetShopAPI.Controllers
                                                                 NomeAnimal = agend.Animal.Nome,
                                                                 PorteAnimal = agend.Animal.PorteAnimal,
                                                                 GeneroBiologico = agend.Animal.GeneroBiologico,
-                                                                NomeRaca = agend.Animal.Raca.Nome
+                                                                NomeRaca = agend.Animal.Raca.Nome,
+                                                                Status = agend.Status
                                                             })
                                                             .OrderBy(agend => agend.HoraAgendada)
                                                             .ThenBy(agend => agend.NomeServico)
