@@ -18,7 +18,7 @@ namespace PetShopAPI.Service
                 Subject = new ClaimsIdentity(new Claim[] {
                     new Claim(ClaimTypes.Name, authentication.Id.ToString())
                 }),
-                Expires = DateTime.UtcNow.AddHours(2),
+                Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
